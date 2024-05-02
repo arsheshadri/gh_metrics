@@ -31,7 +31,7 @@ jobs:
         uses: github/issue-metrics@v3
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SEARCH_QUERY: 'repo:arsheshadri/edw repo:arsheshadri/gh_metrics is:pr created:${{ env.last_month }} -reason:"not planned"'
+          SEARCH_QUERY: 'repo:arsheshadri/edw repo:arsheshadri/gh_metrics is:branch created:${{ env.last_month }} -reason:"not planned"'
 
 #      - name: Print GitHub event payload
 #        run: echo "${{ toJson(github.event) }}"
