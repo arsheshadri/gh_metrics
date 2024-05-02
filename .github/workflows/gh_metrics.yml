@@ -33,6 +33,11 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SEARCH_QUERY: 'repo:arsheshadri/edw repo:arsheshadri/gh_metrics is:pr created:${{ env.last_month }} -reason:"not planned"'
 
+      - name: Read Metrics
+        shell: bash
+        run: |
+          cat ./issue_metrics.md
+
 #      - name: Print GitHub event payload
 #        run: echo "${{ toJson(github.event) }}"
 
