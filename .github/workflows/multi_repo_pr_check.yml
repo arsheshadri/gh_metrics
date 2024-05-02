@@ -11,3 +11,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Print Pull Request Info
+        run: |
+          jq -n --arg repo "$GITHUB_REPOSITORY" --arg pr_num "$GITHUB_EVENT_NUMBER" --arg incoming_branch "$GITHUB_HEAD_REF" --arg target_branch "$GITHUB_BASE_REF" '{"Repository": $repo, "PR_Number": $pr_num | tonumber, "Incoming_Branch": $incoming_branch, "Target_Branch": $target_branch}'
+    
