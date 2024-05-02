@@ -3,7 +3,8 @@ name: Pull Request Monitor
 on:
   pull_request:
     types: [opened, reopened, closed, edited, assigned, review_requested, review_request_removed, labeled, unlabeled]
-
+    branches:
+      - '*'
 jobs:
   monitor-pr:
     runs-on: ubuntu-latest
