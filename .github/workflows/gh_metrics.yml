@@ -21,14 +21,11 @@ jobs:
           first_day=$(date -d "last month" +%Y-%m-01)
 
           # Calculate the last day of the previous month
-          last_day=$(date -d "$first_day +1 month -1 day" +%Y-%m-%d)
-
-          # Calculate the last day of the previous month
-          today=$(date +%Y-%m-%d)
+          last_day=$(date -d "$first_day +1 month +3 day" +%Y-%m-%d)
 
           #Set an environment variable with the date range
-          echo "$first_day..$today"
-          echo "last_month=$first_day..$today" >> "$GITHUB_ENV"
+          echo "$first_day..$last_day"
+          echo "last_month=$first_day..$last_day" >> "$GITHUB_ENV"
 
       - name: Get issue metrics
         uses: github/issue-metrics@v3
