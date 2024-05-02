@@ -1,0 +1,13 @@
+name: Pull Request Monitor
+
+on:
+  pull_request:
+    types: [opened, reopened, closed, edited, assigned, review_requested, review_request_removed, labeled, unlabeled]
+
+jobs:
+  monitor-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
