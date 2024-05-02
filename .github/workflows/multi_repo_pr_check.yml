@@ -5,6 +5,8 @@ on:
       - opened
       - reopened
       - closed
+    branches:
+      - '*'
 
 permissions:
   contents: read
