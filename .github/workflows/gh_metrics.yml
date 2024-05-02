@@ -33,6 +33,9 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SEARCH_QUERY: 'repo:arsheshadri/edw repo:arsheshadri/gh_metrics is:branch #created:${{ env.last_month }} -reason:"not planned"'
 
+      - name: Print GitHub event payload
+        run: echo "${{ toJson(github.event) }}"
+
       - name: Create issue
         uses: peter-evans/create-issue-from-file@v4
         with:
