@@ -1,1 +1,19 @@
+name: GH Events from EDW Repo
 
+on:
+  pull_request:
+    paths:
+      - 'edw/**'
+    types: [opened, reopened, synchronize]
+
+jobs:
+  print_pull_request_info:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: EDW Pull Request Info
+      run: |
+        echo "Repository Name: $GITHUB_REPOSITORY"
+        echo "PR Number: ${{ github.event.number }}"
+        echo "Incoming Branch: ${{ github.event.pull_request.head.ref }}"
+        echo "Target Branch: ${{ github.event.pull_request.base.ref }}"
