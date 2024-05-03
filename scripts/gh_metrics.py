@@ -3,8 +3,10 @@ from github import Github
 import os
 import json
 
+github_token = os.environ.get('GITHUB_TOKEN')
+
 # GitHub API token or username/password authentication
-g = Github("your_access_token")
+g = Github(github_token)
 
 # List of repository names
 repo_names = ["owner1/repo1", "owner2/repo2"]  # Add as many repositories as needed
