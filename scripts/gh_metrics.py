@@ -35,7 +35,7 @@ for repo_name in repo_names:
         repo = g.get_repo(repo_name)
         
         # Fetch events from the repository within the past day
-        events = repo.get_events(since=since, until=until)
+        events = repo.get_events()
         
         print(f"Events for repository {repo_name}:")
         
