@@ -34,39 +34,33 @@ for repo_name in repo_names:
         # Get the repository object
         repo = g.get_repo(repo_name)
         
-        print(f"Branch details for repository {repo_name}:")    
         # Get all branches of the repository
         branches = repo.get_branches()
         
         # Fetch events from the repository within the past day
         events = repo.get_events()
-
+        print(f"Branch details for repository {repo_name}:")    
         # Iterate through each branch
         for branch in branches:
-            # Get branch protection status
-            branch_protection = repo.get_branch_protection(branch.name)
-            protection_status = "Protected" if branch_protection.protected else "Not Protected"
-            
-            # Get branch creator's username and creation datetime
+           # Get branch creator's username and creation datetime
             commit = repo.get_commit(branch.commit.sha)
             creator = commit.commit.author.name
             creation_datetime = format_datetime(commit.commit.author.date)
             
-            # Get GitHub team name (if applicable)
-            team_name = "N/A"  # Replace with actual implementation to fetch team name
+            # Get branch status (assuming it's always active)
+            branch_status = "Active"
             
             # Print branch details
             print(f"Branch Name: {branch.name}")
-            print(f"Status: {protection_status}")
+            print(f"Status: {branch_status}")
             print(f"Creator's Username: {creator}")
-            print(f"GitHub Team Name: {team_name}")
             print(f"Creation Datetime: {creation_datetime}")
             print()
-
+            
         print(f"Events for repository {repo_name}:")
         # Iterate through events
         for event in events:
             print(f"{event.created_at}: {event.type} by {event.actor.login}")
     
     except Exception as e:
-        print(f"Error fetching events for repository {repo_name}: {e}")
+        print(f"Error fetching metrics for repository {repo_name}: {e}")
