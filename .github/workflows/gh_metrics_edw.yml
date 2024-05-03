@@ -1,8 +1,7 @@
 name: GH Events from EDW Repo
 
 on:
-  pull_request_target:
-    types: [opened, closed, reopened, synchronize]
+  workflow_dispatch:
 
 jobs:
   print_pull_request_info:
