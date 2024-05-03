@@ -1,17 +1,16 @@
 name: GH Events from EDW Repo
 
 on:
-  pull_request:
-    paths:
-      - 'edw/**'
-    types: [opened, reopened, synchronize]
+  pull_request_target:
+    types: [opened, closed, reopened, synchronize]
 
 jobs:
   print_pull_request_info:
     runs-on: ubuntu-latest
     
     steps:
-    - name: EDW Pull Request Info
+    - name: Print Pull Request Info
+      if: ${{ github.event.repository.full_name == 'arsheshadri/edw' }}
       run: |
         echo "Repository Name: $GITHUB_REPOSITORY"
         echo "PR Number: ${{ github.event.number }}"
