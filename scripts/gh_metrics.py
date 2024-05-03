@@ -8,7 +8,9 @@ github_token = os.environ.get('GITHUB_TOKEN')
 # GitHub API token or username/password authentication
 g = Github(github_token)
 
-with open('config.json') as f:
+config_file_path = os.path.join(base_repo_path, 'config', 'config.json')
+
+with open(config_file_path) as f:
     config = json.load(f)
     repo_names = config['repo_names']
 
