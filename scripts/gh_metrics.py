@@ -8,7 +8,7 @@ github_token = os.environ.get('GITHUB_TOKEN')
 # GitHub API token or username/password authentication
 g = Github(github_token)
 
-base_repo_path = os.getenv('GITHUB_WORKSPACE')
+base_repo_path = os.path.dirname(os.getenv('GITHUB_WORKSPACE'))
 print(f"base_repo_path is {base_repo_path}:")
 config_file_path = os.path.join(base_repo_path, 'config', 'config.json')
 print(f"config_file_path is {config_file_path}:")
