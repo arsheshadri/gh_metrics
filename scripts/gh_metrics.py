@@ -8,8 +8,9 @@ github_token = os.environ.get('GITHUB_TOKEN')
 # GitHub API token or username/password authentication
 g = Github(github_token)
 
-# List of repository names
-repo_names = ["owner1/repo1", "owner2/repo2"]  # Add as many repositories as needed
+with open('config.json') as f:
+    config = json.load(f)
+    repo_names = config['repo_names']
 
 # Get current date and time
 now = datetime.utcnow()
