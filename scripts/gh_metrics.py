@@ -8,6 +8,9 @@ github_token = os.environ.get('GITHUB_TOKEN')
 # GitHub API token or username/password authentication
 g = Github(github_token)
 
+def format_datetime(dt):
+    return dt.strftime('%Y-%m-%d %H:%M:%S')
+
 base_repo_path = os.path.dirname(os.getenv('GITHUB_WORKSPACE'))
 print(f"base_repo_path is {base_repo_path}:")
 #config_file_path = os.path.join(base_repo_path, 'config', 'configs.json')
