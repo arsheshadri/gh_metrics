@@ -19,6 +19,6 @@ jobs:
       run: pip install PyGithub
 
     - name: Run Python script
-      run: python ./scripts/gh_metrics.py
+      run: python scripts/gh_metrics.py
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
