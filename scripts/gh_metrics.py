@@ -10,7 +10,8 @@ g = Github(github_token)
 
 base_repo_path = os.path.dirname(os.getenv('GITHUB_WORKSPACE'))
 print(f"base_repo_path is {base_repo_path}:")
-config_file_path = os.path.join(base_repo_path, 'config', 'configs.json')
+#config_file_path = os.path.join(base_repo_path, 'config', 'configs.json')
+config_file_path = os.environ.get('CONFIG_FILE')
 print(f"config_file_path is {config_file_path}:")
 
 with open(config_file_path) as f:
