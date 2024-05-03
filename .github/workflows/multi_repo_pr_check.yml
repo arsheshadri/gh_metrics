@@ -22,3 +22,5 @@ jobs:
       run: python scripts/gh_metrics.py
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        CONFIG_FILE: config/configs.json
+        
