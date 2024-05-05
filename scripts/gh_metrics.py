@@ -73,7 +73,7 @@ for repo_name in repo_names:
 
             # Execute SQL to insert data into Snowflake table
             cursor = conn.cursor()
-            cursor.execute("INSERT INTO Github_feature_branches (User_name,Repo_name,Branch_name, Datetime_of_creation,Status) VALUES (%s, %s)", ({creator}, {repo_name},{branch.name},{creation_datetime},{branch_status}))
+            cursor.execute("INSERT INTO Github_feature_branches (User_name,Repo_name,Branch_name, Datetime_of_creation,Status) VALUES (%s,%s,%s,%s, %s)", ({creator}, {repo_name},{branch.name},{creation_datetime},{branch_status}))
             cursor.close()
             
             # Commit the transaction
