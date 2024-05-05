@@ -56,13 +56,13 @@ for repo_name in repo_names:
                 branch_name = event.payload.get("ref")
                 print(f"Branch : {branch_name} , Event Type : {event.type} by {event.actor.login} at {event.created_at}")
             elif event.type == "PullRequestEvent":
-                pr_number = event.payload.get("number")
-                pr_action = event.payload.get("action")
-                source_branch = pull_request.get("head").get("ref")
-                target_branch = pull_request.get("base").get("ref")
-                pr_status = pull_request.get("state")
-                pr_creation_time = pull_request.get("created_at")
-                print(f"Pull Request #{pr_number} {pr_action} from branch {source_branch} to branch {target_branch} at {pr_creation_time} is in {pr_status} state")
+                payload = event.payload
+                pr_number = payload.get("number")
+                pr_status = payload.get("action")
+                pr_created_at = payload.get("created_at")
+                source_branch = payload.get("pull_request").get("head").get("ref")
+                target_branch = payload.get("pull_request").get("base").get("ref")
+                print(f"Pull Request# {pr_number} {pr_action} from branch {source_branch} to branch {target_branch} at {pr_creation_time} is in {pr_status} state")
             # Execute SQL to insert data into Snowflake table
     #        cursor = conn.cursor()
    #         cursor.execute("INSERT INTO Github_feature_branches (User_name,Repo_name,Branch_name, Datetime_of_creation,Status) VALUES (%s,%s,%s,%s, %s)", (creator, repo_name,branch.name,creation_datetime,branch_status))
