@@ -78,6 +78,36 @@ for repo_name in repo_names:
             
             # Commit the transaction
             conn.commit()
+
+        # Fetch pull requests
+        pull_requests = repo.get_pulls()
+        
+        # Print details of each pull request
+        for pr in pull_requests:
+            print(f"Pull Request #{pr.number}: {pr.title}")
+            # Get source and target branches
+            source_branch = pr.head.ref
+            target_branch = pr.base.ref
+            
+            # Get datetime of PR
+            pr_datetime = pr.created_at
+            
+            # Get submitter (PR creator)
+            submitter = pr.user.login
+            
+            # Get approvers (reviewers)
+            approvers = [review.user.login for review in pr.get_reviews()]
+          
+            # Get status (e.g., open, closed, merged)
+            status = pr.state
+           
+            # Execute SQL to insert data into Snowflake table
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO GitHub_pull_requests ( Repo_Name,PR_Number,Name_of_incoming_branch,Name_of_target_branch,Datetime_of_merge_request_creation,Name_of_submitter,Name_of_approver,GitHub_team_name,Datetime_of_merge ,Status) VALUES (%s,%s,%s,%s, %s)", (repo_name,pr.number,source_branch,target_branch,pr_datetime,submitter,pr.get_reviews(),null,null,pr.state))
+            cursor.close()
+            
+            # Commit the transaction
+            conn.commit()
             
         # Close the connection
         conn.close()
