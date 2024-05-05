@@ -19,7 +19,7 @@ config_file_path = os.environ.get('CONFIG_FILE')
 print(f"config_file_path is {config_file_path}:")
 
 conn = snowflake.connector.connect(
-    user='SRANGANATH',
+    user='sranganath@phdata.io',
     password='Mongodb@2024',
     account='SNOWDATA',
     warehouse='DEFAULT_USER_WH',
