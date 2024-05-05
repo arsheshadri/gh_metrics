@@ -110,7 +110,7 @@ for repo_name in repo_names:
             conn.commit()
             
         # Close the connection
-        conn.close()
+conn.close()
 #        print(f"Events for repository {repo_name}:")
         # Iterate through events
 #        for event in events:
