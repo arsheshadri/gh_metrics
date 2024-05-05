@@ -20,7 +20,7 @@ print(f"config_file_path is {config_file_path}:")
 
 conn = snowflake.connector.connect(
     user='SRANGANATH',
-    password='Ambari@2024',
+    password='Mongodb@2024',
     account='SNOWDATA',
     warehouse='DEFAULT_USER_WH',
     database='USER_SRANGANATH',
@@ -68,11 +68,12 @@ for repo_name in repo_names:
             print(f"Status: {branch_status}")
             print(f"Creator's Username: {creator}")
             print(f"Creation Datetime: {creation_datetime}")
-            print()
+            
+            print("Connecting to Snowflake....")
 
             # Execute SQL to insert data into Snowflake table
             cursor = conn.cursor()
-            cursor.execute("INSERT INTO your_table (User_name,Repo_name,Branch_name, Datetime_of_creation,Status) VALUES (%s, %s)", ({creator}, {repo_name},{branch.name},{creation_datetime},{branch_status}))
+            cursor.execute("INSERT INTO Github_feature_branches (User_name,Repo_name,Branch_name, Datetime_of_creation,Status) VALUES (%s, %s)", ({creator}, {repo_name},{branch.name},{creation_datetime},{branch_status}))
             cursor.close()
             
             # Commit the transaction
