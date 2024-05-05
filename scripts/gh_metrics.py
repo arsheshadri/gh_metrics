@@ -51,10 +51,10 @@ for repo_name in repo_names:
         branches = repo.get_branches()
 
         # Fetch pull requests
-        pull_requests = repo.get_pulls()
+        pull_requests = repo.get_pulls(state='all')
         
         # Fetch events from the repository within the past day
- #       events = repo.get_events()
+        events = repo.get_events()
         print(f"Branch details for repository {repo_name}:")    
         # Iterate through each branch
         for branch in branches:
@@ -67,10 +67,10 @@ for repo_name in repo_names:
             branch_status = "Active"
             
             # Print branch details
-            print(f"Branch Name: {branch.name}")
-            print(f"Status: {branch_status}")
-            print(f"Creator's Username: {creator}")
-            print(f"Creation Datetime: {creation_datetime}")
+ #           print(f"Branch Name: {branch.name}")
+ #           print(f"Status: {branch_status}")
+ #           print(f"Creator's Username: {creator}")
+ #           print(f"Creation Datetime: {creation_datetime}")
             
             print("Connecting to Snowflake....")
 
@@ -84,7 +84,7 @@ for repo_name in repo_names:
 
         # Print details of each pull request
         for pr in pull_requests:
-            print(f"Pull Request #{pr.number}: {pr.title}")
+#            print(f"Pull Request #{pr.number}: {pr.title}")
             # Get source and target branches
             source_branch = pr.head.ref
             target_branch = pr.base.ref
@@ -111,10 +111,10 @@ for repo_name in repo_names:
             
         # Close the connection
 
-#        print(f"Events for repository {repo_name}:")
+        print(f"Events for repository {repo_name}:")
         # Iterate through events
-#        for event in events:
-#            print(f"{event.created_at}: {event.type} by {event.actor.login}")
+        for event in events:
+            print(f"{event.created_at}: {event.type} by {event.actor.login}")
     
     except Exception as e:
         print(f"Error fetching metrics for repository {repo_name}: {e}")
