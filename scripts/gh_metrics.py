@@ -46,75 +46,22 @@ for repo_name in repo_names:
     try:
         # Get the repository object
         repo = g.get_repo(repo_name)
-        
-        # Get all branches of the repository
-        branches = repo.get_branches()
 
-        # Fetch pull requests
-        pull_requests = repo.get_pulls(state='all')
-        
         # Fetch events from the repository within the past day
-        events = repo.get_events()
-        print(f"Branch details for repository {repo_name}:")    
-        # Iterate through each branch
-        for branch in branches:
-           # Get branch creator's username and creation datetime
-            commit = repo.get_commit(branch.commit.sha)
-            creator = commit.commit.author.name
-            creation_datetime = format_datetime(commit.commit.author.date)
-            
-            # Get branch status (assuming it's always active)
-            branch_status = "Active"
-            
-            # Print branch details
- #           print(f"Branch Name: {branch.name}")
- #           print(f"Status: {branch_status}")
- #           print(f"Creator's Username: {creator}")
- #           print(f"Creation Datetime: {creation_datetime}")
-            
-            print("Connecting to Snowflake....")
-
-            # Execute SQL to insert data into Snowflake table
-            cursor = conn.cursor()
-            cursor.execute("INSERT INTO Github_feature_branches (User_name,Repo_name,Branch_name, Datetime_of_creation,Status) VALUES (%s,%s,%s,%s, %s)", (creator, repo_name,branch.name,creation_datetime,branch_status))
-            cursor.close()
-            
-            # Commit the transaction
-            conn.commit()
-
-        # Print details of each pull request
-        for pr in pull_requests:
-#            print(f"Pull Request #{pr.number}: {pr.title}")
-            # Get source and target branches
-            source_branch = pr.head.ref
-            target_branch = pr.base.ref
-            
-            # Get datetime of PR
-            pr_datetime = pr.created_at
-            
-            # Get submitter (PR creator)
-            submitter = pr.user.login
-            
-            # Get approvers (reviewers)
-            approvers = [review.user.login for review in pr.get_reviews()]
-          
-            # Get status (e.g., open, closed, merged)
-            status = pr.state
-           
-            # Execute SQL to insert data into Snowflake table
-            cursor = conn.cursor()
-            cursor.execute("INSERT INTO GitHub_pull_requests ( Repo_Name,PR_Number,Name_of_incoming_branch,Name_of_target_branch,Datetime_of_merge_request_creation,Name_of_submitter,Status) VALUES (%s,%s,%s,%s,%s,%s,%s)", (repo_name,pr.number,source_branch,target_branch,pr_datetime,submitter,pr.state))
-            cursor.close()
-            
-            # Commit the transaction
-            conn.commit()
-            
-        # Close the connection
-
         print(f"Events for repository {repo_name}:")
-        # Iterate through events
+        events = repo.get_events()
         for event in events:
-            print(f"{event.created_at}: {event.type} by {event.actor.login}")
+            #print(f"{event.created_at}: {event.type} by {event.actor.login}")
+            if event.payload.get("ref_type") == "branch":
+                branch_name = event.payload.get("ref")
+                print(f"Branch : {branch_name} , Event Type : event.type by {event.actor.login} at {event.created_at}")
+            # Execute SQL to insert data into Snowflake table
+    #        cursor = conn.cursor()
+   #         cursor.execute("INSERT INTO Github_feature_branches (User_name,Repo_name,Branch_name, Datetime_of_creation,Status) VALUES (%s,%s,%s,%s, %s)", (creator, repo_name,branch.name,creation_datetime,branch_status))
+  #          cursor.close()
+            
+            # Commit the transaction
+ #           conn.commit()
     
     except Exception as e:
         print(f"Error fetching metrics for repository {repo_name}: {e}")
