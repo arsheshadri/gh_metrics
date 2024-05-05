@@ -49,9 +49,12 @@ for repo_name in repo_names:
         
         # Get all branches of the repository
         branches = repo.get_branches()
+
+        # Fetch pull requests
+        pull_requests = repo.get_pulls()
         
         # Fetch events from the repository within the past day
-        events = repo.get_events()
+ #       events = repo.get_events()
         print(f"Branch details for repository {repo_name}:")    
         # Iterate through each branch
         for branch in branches:
@@ -79,9 +82,6 @@ for repo_name in repo_names:
             # Commit the transaction
             conn.commit()
 
-        # Fetch pull requests
-        pull_requests = repo.get_pulls()
-        
         # Print details of each pull request
         for pr in pull_requests:
             print(f"Pull Request #{pr.number}: {pr.title}")
@@ -111,10 +111,10 @@ for repo_name in repo_names:
             
         # Close the connection
         conn.close()
-        print(f"Events for repository {repo_name}:")
+#        print(f"Events for repository {repo_name}:")
         # Iterate through events
-        for event in events:
-            print(f"{event.created_at}: {event.type} by {event.actor.login}")
+#        for event in events:
+#            print(f"{event.created_at}: {event.type} by {event.actor.login}")
     
     except Exception as e:
         print(f"Error fetching metrics for repository {repo_name}: {e}")
