@@ -54,7 +54,7 @@ for repo_name in repo_names:
             #print(f"{event.created_at}: {event.type} by {event.actor.login}")
             if event.payload.get("ref_type") == "branch":
                 branch_name = event.payload.get("ref")
-                print(f"Branch : {branch_name} , Event Type : event.type by {event.actor.login} at {event.created_at}")
+                print(f"Branch : {branch_name} , Event Type : {event.type} by {event.actor.login} at {event.created_at}")
             # Execute SQL to insert data into Snowflake table
     #        cursor = conn.cursor()
    #         cursor.execute("INSERT INTO Github_feature_branches (User_name,Repo_name,Branch_name, Datetime_of_creation,Status) VALUES (%s,%s,%s,%s, %s)", (creator, repo_name,branch.name,creation_datetime,branch_status))
