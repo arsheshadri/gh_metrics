@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from github import Github
 import os
 import json
+import snowflake.connector
 
 github_token = os.environ.get('GITHUB_TOKEN')
 
@@ -16,6 +17,15 @@ print(f"base_repo_path is {base_repo_path}:")
 #config_file_path = os.path.join(base_repo_path, 'config', 'configs.json')
 config_file_path = os.environ.get('CONFIG_FILE')
 print(f"config_file_path is {config_file_path}:")
+
+conn = snowflake.connector.connect(
+    user='SRANGANATH',
+    password='Ambari@2024',
+    account='PHDATA',
+    warehouse='DEFAULT_USER_WH',
+    database='USER_SRANGANATH',
+    schema='ANALYTICS_DEV'
+)
 
 with open(config_file_path) as f:
     config = json.load(f)
@@ -59,6 +69,17 @@ for repo_name in repo_names:
             print(f"Creator's Username: {creator}")
             print(f"Creation Datetime: {creation_datetime}")
             print()
+
+            # Execute SQL to insert data into Snowflake table
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO your_table (User_name,Repo_name,Branch_name, Datetime_of_creation,Status) VALUES (%s, %s)", ({creator}, {repo_name},{branch.name},{creation_datetime},{branch_status}))
+            cursor.close()
+            
+            # Commit the transaction
+            conn.commit()
+            
+            # Close the connection
+            conn.close()
             
         print(f"Events for repository {repo_name}:")
         # Iterate through events
