@@ -110,7 +110,7 @@ for repo_name in repo_names:
             conn.commit()
             
         # Close the connection
-conn.close()
+
 #        print(f"Events for repository {repo_name}:")
         # Iterate through events
 #        for event in events:
@@ -118,3 +118,4 @@ conn.close()
     
     except Exception as e:
         print(f"Error fetching metrics for repository {repo_name}: {e}")
+conn.close()
