@@ -62,7 +62,7 @@ for repo_name in repo_names:
                 pr_created_at = payload.get("created_at")
                 source_branch = payload.get("pull_request").get("head").get("ref")
                 target_branch = payload.get("pull_request").get("base").get("ref")
-                print(f"Pull Request# {pr_number} {pr_action} from branch {source_branch} to branch {target_branch} at {pr_creation_time} is in {pr_status} state")
+                print(f"Pull Request# {pr_number} {payload} from branch {source_branch} to branch {target_branch} at {pr_creation_time} is in {pr_status} state")
             # Execute SQL to insert data into Snowflake table
     #        cursor = conn.cursor()
    #         cursor.execute("INSERT INTO Github_feature_branches (User_name,Repo_name,Branch_name, Datetime_of_creation,Status) VALUES (%s,%s,%s,%s, %s)", (creator, repo_name,branch.name,creation_datetime,branch_status))
