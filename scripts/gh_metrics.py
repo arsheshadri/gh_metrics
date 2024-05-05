@@ -21,7 +21,7 @@ print(f"config_file_path is {config_file_path}:")
 conn = snowflake.connector.connect(
     user='SRANGANATH',
     password='Ambari@2024',
-    account='PHDATA',
+    account='SNOWDATA',
     warehouse='DEFAULT_USER_WH',
     database='USER_SRANGANATH',
     schema='ANALYTICS_DEV'
