@@ -6,7 +6,7 @@ import json
 
 def main():
     org_name = os.environ.get('GITHUB_ORG_NAME')
-    access_token = os.environ.get('GITHUB_ACCESS_TOKEN')
+    access_token = os.environ.get('GITHUB_TOKEN')
   
     if not org_name or not access_token:
       print("Missing organization name or access token.")
