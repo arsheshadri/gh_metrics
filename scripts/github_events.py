@@ -5,7 +5,7 @@ import os
 import json
 
 def main():
-    org_name = 'arsheshadri' #os.environ.get('GITHUB_ORG_NAME')
+    org_name = os.environ.get('GITHUB_ORG_NAME')
     access_token = os.environ.get('GITHUB_ACCESS_TOKEN')
   
     if not org_name or not access_token:
