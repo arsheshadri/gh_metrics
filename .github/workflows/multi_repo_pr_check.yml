@@ -1,4 +1,4 @@
-name: Pull Request Monitor
+name: Github Events Utility
 on:
   workflow_dispatch:
 
