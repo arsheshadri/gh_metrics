@@ -12,7 +12,7 @@ def main():
       print("Missing organization name or access token.")
       return None
     
-    print(f"Retrieving Repositories for Organization- {{ org_name }}")
+    print(f"Retrieving Repositories for Organization - { org_name }")
     repositories = get_organization_repositories(org_name, access_token)
     if repositories:
         print("Repositories in the organization:")
