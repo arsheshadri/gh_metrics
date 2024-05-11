@@ -24,7 +24,7 @@ jobs:
       #run: python scripts/gh_metrics.py
       run: python scripts/github_events.py 
       env:
-        GITHUB_ORG_NAME: ${{ secrets.GITHUB_ORG_NAME }}
+        GITHUB_ORG_NAME: "arsheshadri"
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         CONFIG_FILE: config/configs.json
         
