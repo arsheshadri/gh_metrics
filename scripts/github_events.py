@@ -1,4 +1,4 @@
-from github_api import get_organization_repositories
+from get_github_org_repos import get_organization_repositories
 
 def main():
     org_name = os.environ.get('GITHUB_ORG_NAME')
